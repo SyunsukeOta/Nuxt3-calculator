@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { blockList } from "@/blockData"
 import type { Digit, Operator, BlockType, FunctionMap, Block } from "@/interfaces"
+import { useParams } from "@/composables/useParams"
 import { isDigit, isOperator, keyAction, functionMap } from "@/functions"
 
-const buttonList: Block[][] = blockList
-const message = ref('0')
+const params = useParams()
 
+const buttonList: Block[][] = blockList
 
 onMounted(() => {
 	document.addEventListener('keydown', keyAction)
@@ -43,7 +44,7 @@ const handleBlockClick = (block: Block) => {
 
 <template>
 	<div class="container" id="app1">
-		<p class="display">{{ message }}</p>
+		<p class="display">{{ params.message }}</p>
 		<div id="buttons">
 			<div v-for="(row, rowIndex) in buttonList" :key="rowIndex" class="row">
 				<CalcButton v-for="button in row" :key="button.name" :block="button" @blockClick="handleBlockClick"/>
