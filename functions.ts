@@ -1,4 +1,4 @@
-import type { Digit, Operator, FunctionMap, Params} from "@/interfaces"
+import type { Digit, Operator, FunctionMap} from "@/interfaces"
 import { useParams} from "@/composables/useParams"
 
 const DIGITS: Digit[] = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
@@ -31,11 +31,11 @@ export const changeCal = () => {
 	}
 }
 
-export const changeNum = (c: Operator) => {
+export const changeNum = () => {
 	const params= useParams()
 	params.value.prev = params.value.curr
 	params.value.curr = 0
-	params.value.message = String(c)
+	params.value.message = String(params.value.calc)
 }
 
 export const viewAns = () => {
@@ -48,10 +48,9 @@ export const viewAns = () => {
 
 export const num = (n: Digit) => {
 	const params= useParams()
-	console.log('num', n);
-	if (params.value.equa == 1) {
+	if (params.value.equa) {
 		params.value.curr = 0
-		params.value.equa = 0
+		params.value.equa = false
 	}
 	params.value.curr = params.value.curr*10 + Number(n)
 	params.value.message = String(params.value.curr)
@@ -59,27 +58,24 @@ export const num = (n: Digit) => {
 
 export const cal = (c: Operator) => {
 	const params= useParams()
-	console.log('cal', c);
 	if (params.value.calc != null) viewAns()
-	changeNum(c)
 	params.value.calc = c
+	changeNum()
 }
 
 export const ans = () => {
 	const params= useParams()
-	console.log("Ans");
 	if (params.value.curr != 0 && params.value.prev != 0) viewAns()
-	params.value.equa = 1
+	params.value.equa = true
 }
 
 export const reset = () => {
 	const params= useParams()
-	console.log('Reset');
 	params.value.curr = 0
 	params.value.prev = 0
 	params.value.calc = null
 	params.value.message = '0'
-	params.value.equa = 0
+	params.value.equa = false
 }
 
-export const functionMap: FunctionMap = { num, cal ,ans, reset}
+export const functionMap: FunctionMap = { num, cal, ans, reset }

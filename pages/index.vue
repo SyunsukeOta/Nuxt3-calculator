@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { blockList } from "@/blockData"
-import type { Digit, Operator, BlockType, FunctionMap, Block } from "@/interfaces"
+import type { Digit, Operator, Block } from "@/interfaces"
 import { useParams } from "@/composables/useParams"
 import { isDigit, isOperator, keyAction, functionMap } from "@/functions"
 

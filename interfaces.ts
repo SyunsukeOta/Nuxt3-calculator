@@ -13,10 +13,9 @@ export type FunctionMap = {
 	reset: () => void;
 }
 export type Params = {
-	nums: number;
 	curr: number;
 	prev: number;
-	equa: number;
+	equa: boolean;
 	calc: Operator | null;
 	message: String;
 }
